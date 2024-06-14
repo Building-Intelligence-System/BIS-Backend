@@ -5,17 +5,15 @@ import com.business.intelligence.service.model.constructionregion.Task;
 import com.business.intelligence.service.model.people.Person;
 import com.business.intelligence.service.model.people.Role;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Instant;
 import java.util.List;
 
 public class ConnectionTest {
 
+//    @Autowired
     PersonRepository repository;
-
-    ConnectionTest(PersonRepository repository) {
-        this.repository = repository;
-    }
 
 
     @Test
@@ -45,8 +43,6 @@ public class ConnectionTest {
 
         final Person dbPerson = repository.findById(1).get();
 
-//        int res = 0;
-
-
+        int res = 0;
     }
 }

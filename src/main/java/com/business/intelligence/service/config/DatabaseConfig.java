@@ -1,5 +1,6 @@
 package com.business.intelligence.service.config;
 
+import com.business.intelligence.service.dao.PersonRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -18,7 +19,6 @@ public class DatabaseConfig {
 //        source.setPassword(password);
 //        return source;
 //    }
-
 //    @Bean
 //    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(){
 //        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(this.dataSource());
