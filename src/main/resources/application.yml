@@ -1,17 +1,51 @@
+#spring:
+#  application:
+#    name: business-intelligence-service
+#    datasource:
+#      type: com.zaxxer.hikari.HikariDataSource
+#      url: jdbc:postgresql://localhost:5432/bis
+#      username: postgres
+#      password: postgres
+#      driver-class-name: com.mysql.jdbc.Driver
+#      hikari:
+#        maximumPoolSize: 30
+#
+#  jpa:
+#    generate-ddl: true
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+
 spring:
   application:
-    name: business-intelligence-service
-    datasource:
-      type: com.zaxxer.hikari.HikariDataSource
-      url: jdbc:postgresql://localhost:5432/bis
-      username: postgres
-      password: postgres
-      driver-class-name: com.mysql.jdbc.Driver
-      hikari:
-        maximumPoolSize: 30
-
+    name: urganlabs-backend
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
   jpa:
-    generate-ddl: true
     hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+      ddl-auto: create-drop
+    generate-ddl: true
+    show-sql: false
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        order_inserts: true
+        jdbc:
+          batch_size: 500000
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO

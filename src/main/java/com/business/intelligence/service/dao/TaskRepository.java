@@ -1,5 +1,6 @@
 package com.business.intelligence.service.dao;
 
+import com.business.intelligence.service.model.constructionregion.Task;
 import com.business.intelligence.service.model.people.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Integer> {
+public interface TaskRepository extends JpaRepository<Task, Integer> {
 
-    Optional<Person> findById(Integer id);
+    Optional<Task> findById(Integer id);
 }

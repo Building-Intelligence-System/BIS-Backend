@@ -1,6 +1,7 @@
 package com.business.intelligence.service.config;
 
 import com.business.intelligence.service.dao.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -9,6 +10,7 @@ import javax.sql.DataSource;
 
 public class DatabaseConfig {
 
+//
 //    @Bean
 //    public DataSource dataSource(){
 //        System.out.println(driverClass+" "+ url+" "+username+" "+password);

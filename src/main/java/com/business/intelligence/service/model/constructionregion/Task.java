@@ -9,11 +9,11 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
     private Instant begin;
     private Instant end;
@@ -21,9 +21,20 @@ public class Task {
 
     @OneToOne
     private Person head;
-    @OneToMany
+    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
     private List<Person> workers;
 
     @ManyToOne
     private Stage stage;
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", begin=" + begin +
+                ", end=" + end +
+                ", expectedDuration=" + expectedDuration +
+                '}';
+    }
 }
