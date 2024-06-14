@@ -1,17 +1,17 @@
 package com.business.intelligence.service.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 
 @Data
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString
 public class QrEntity {
 
-    private Integer buildingId;
+    private Integer projectId;
     private Instant time;
     private String password;
 

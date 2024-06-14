@@ -88,7 +88,6 @@ public class ConnectionTest {
         project.setName("project");
         project.setStartDate(Instant.now());
         project.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
-        project.setExpectedEndDate(Instant.parse("2027-06-01T00:00:01Z"));
         project.setStages(List.of(stage));
         projectRepository.save(project);
     }

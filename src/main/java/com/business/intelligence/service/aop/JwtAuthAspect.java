@@ -32,8 +32,8 @@ public class JwtAuthAspect {
     @Before("controllerMethod() && !(personCreateMethod() || personAuthMethod())")
     public void jwtCheck(JoinPoint joinPoint) throws AuthException {
         final HttpHeaders arg = (HttpHeaders) joinPoint.getArgs()[0];
-        if (!arg.containsKey("Authorization")) {
-            throw new AuthException("Auth required");
-        }
+//        if (!arg.containsKey("Authorization")) {
+//            throw new AuthException("Auth required");
+//        }
     }
 }
