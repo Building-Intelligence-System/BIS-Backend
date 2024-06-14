@@ -1,15 +1,14 @@
 package com.business.intelligence.service;
 
-import com.business.intelligence.service.dao.PersonRepository;
-import com.business.intelligence.service.dao.ProjectRepository;
-import com.business.intelligence.service.dao.StageRepository;
-import com.business.intelligence.service.dao.TaskRepository;
-import com.business.intelligence.service.model.constructionregion.ConstructionType;
 import com.business.intelligence.service.model.constructionregion.Project;
 import com.business.intelligence.service.model.constructionregion.Stage;
 import com.business.intelligence.service.model.constructionregion.Task;
 import com.business.intelligence.service.model.people.Person;
 import com.business.intelligence.service.model.people.Role;
+import com.business.intelligence.service.repository.PersonRepository;
+import com.business.intelligence.service.repository.ProjectRepository;
+import com.business.intelligence.service.repository.StageRepository;
+import com.business.intelligence.service.repository.TaskRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -53,12 +52,14 @@ public class ConnectionTest {
         task.setStart(Instant.now());
         task.setEnd(Instant.parse("2024-06-01T00:00:01Z"));
         task.setExpectedDuration(100);
+        task.setWorkers(List.of(foreman));
+
         taskRepository.save(task);
 
         worker.setTask(task);
         foreman.setTask(task);
+        task.setWorkers(List.of(foreman));
         task.setHead(foreman);
-        task.setWorkers(List.of(worker));
 
         personRepository.save(foreman);
         personRepository.save(worker);
@@ -87,10 +88,8 @@ public class ConnectionTest {
         project.setEnd(Instant.parse("2024-06-01T00:00:01Z"));
         project.setExpectedDuration(100000);
         project.setStages(List.of(stage));
-        project.setLatitude(27.29);
-        project.setLongitude(27.29);
-        project.setAddress("kykyshkina");
-        project.setType(ConstructionType.RESIDENTIAL);
         projectRepository.save(project);
+
+
     }
 }

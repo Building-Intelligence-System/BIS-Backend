@@ -1,4 +1,4 @@
-package com.business.intelligence.service.dao;
+package com.business.intelligence.service.repository;
 
 import com.business.intelligence.service.model.constructionregion.Stage;
 import org.springframework.data.jpa.repository.JpaRepository;
