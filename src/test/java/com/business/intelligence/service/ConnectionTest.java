@@ -4,6 +4,7 @@ import com.business.intelligence.service.dao.PersonRepository;
 import com.business.intelligence.service.dao.ProjectRepository;
 import com.business.intelligence.service.dao.StageRepository;
 import com.business.intelligence.service.dao.TaskRepository;
+import com.business.intelligence.service.model.constructionregion.ConstructionType;
 import com.business.intelligence.service.model.constructionregion.Project;
 import com.business.intelligence.service.model.constructionregion.Stage;
 import com.business.intelligence.service.model.constructionregion.Task;
@@ -49,17 +50,15 @@ public class ConnectionTest {
 
         final Task task = new Task();
         task.setName("Бетонирование");
-        task.setBegin(Instant.now());
+        task.setStart(Instant.now());
         task.setEnd(Instant.parse("2024-06-01T00:00:01Z"));
         task.setExpectedDuration(100);
-        task.setWorkers(List.of(foreman));
-
         taskRepository.save(task);
 
         worker.setTask(task);
         foreman.setTask(task);
-        task.setWorkers(List.of(foreman));
         task.setHead(foreman);
+        task.setWorkers(List.of(worker));
 
         personRepository.save(foreman);
         personRepository.save(worker);
@@ -74,7 +73,7 @@ public class ConnectionTest {
 
         final Stage stage = new Stage();
         stage.setName("stage");
-        stage.setBegin(Instant.now());
+        stage.setStart(Instant.now());
         stage.setEnd(Instant.parse("2024-06-01T00:00:01Z"));
         stage.setExpectedDuration(1000);
         stage.setTasks(List.of(task));
@@ -88,8 +87,10 @@ public class ConnectionTest {
         project.setEnd(Instant.parse("2024-06-01T00:00:01Z"));
         project.setExpectedDuration(100000);
         project.setStages(List.of(stage));
+        project.setLatitude(27.29);
+        project.setLongitude(27.29);
+        project.setAddress("kykyshkina");
+        project.setType(ConstructionType.RESIDENTIAL);
         projectRepository.save(project);
-
-
     }
 }
