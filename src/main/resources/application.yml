@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: business-intelligence-service
+    datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:postgresql://localhost:5432/bis
+      username: postgres
+      password: postgres
+      driver-class-name: com.mysql.jdbc.Driver
+      hikari:
+        maximumPoolSize: 30
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
