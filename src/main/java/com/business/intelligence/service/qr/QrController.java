@@ -8,10 +8,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
 import java.time.Instant;
@@ -34,7 +31,17 @@ public class QrController {
 
         byte[] image = getQRCodeImage(medium, 250, 250);
         return ResponseEntity.ok(image);
+    }
 
+    @RequestMapping(value = "/work-register", method = RequestMethod.POST, produces = IMAGE_PNG_VALUE)
+    public ResponseEntity<Void> scan(@RequestHeader final HttpHeaders headers,
+                                       @RequestBody QrEntity qrEntity) throws Exception {
+        final Integer userID = Integer.valueOf(headers.get("USER_ID").get(0));
+
+
+        // current userID scan qr
+
+        return ResponseEntity.ok().build();
     }
 
     private static byte[] getQRCodeImage(String text, int width, int height) throws Exception {
@@ -48,5 +55,4 @@ public class QrController {
         byte[] pngData = pngOutputStream.toByteArray();
         return pngData;
     }
-
 }
