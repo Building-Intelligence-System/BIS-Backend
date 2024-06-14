@@ -12,6 +12,8 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String login;
+    private String password;
     private String firstName;
     private String surname;
     private String fatherName;
