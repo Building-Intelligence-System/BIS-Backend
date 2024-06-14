@@ -1,4 +1,4 @@
-package com.business.intelligence.service.model.people;
+package com.business.intelligence.service.model.person;
 
 public enum Role {
     WORKER,

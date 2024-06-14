@@ -1,6 +1,6 @@
-package com.business.intelligence.service.model.people;
+package com.business.intelligence.service.model.person;
 
-import com.business.intelligence.service.model.constructionregion.Task;
+import com.business.intelligence.service.model.building.Task;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,9 +19,6 @@ public class Person {
     private String fatherName;
 
     private Role role;
-
-    @ManyToOne
-    private Task task;
 
     @Override
     public String toString() {

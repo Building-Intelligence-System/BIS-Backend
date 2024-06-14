@@ -1,6 +1,6 @@
 package com.business.intelligence.service.repository;
 
-import com.business.intelligence.service.model.constructionregion.Stage;
+import com.business.intelligence.service.model.building.Stage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,11 +1,11 @@
 package com.business.intelligence.service;
 
 import com.business.intelligence.service.controller.PersonController;
-import com.business.intelligence.service.model.constructionregion.Project;
-import com.business.intelligence.service.model.constructionregion.Stage;
-import com.business.intelligence.service.model.constructionregion.Task;
-import com.business.intelligence.service.model.people.Person;
-import com.business.intelligence.service.model.people.Role;
+import com.business.intelligence.service.model.building.Project;
+import com.business.intelligence.service.model.building.Stage;
+import com.business.intelligence.service.model.building.Task;
+import com.business.intelligence.service.model.person.Person;
+import com.business.intelligence.service.model.person.Role;
 import com.business.intelligence.service.repository.PersonRepository;
 import com.business.intelligence.service.repository.ProjectRepository;
 import com.business.intelligence.service.repository.StageRepository;
@@ -55,15 +55,12 @@ public class ConnectionTest {
 
         final Task task = new Task();
         task.setName("Бетонирование");
-        task.setStart(Instant.now());
-        task.setEnd(Instant.parse("2024-06-01T00:00:01Z"));
-        task.setExpectedDuration(100);
+        task.setStartDate(Instant.now());
+        task.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
+        task.setExpectedEndDate(Instant.parse("2025-06-01T00:00:01Z"));
         task.setWorkers(List.of(foreman));
-
         taskRepository.save(task);
 
-        worker.setTask(task);
-        foreman.setTask(task);
         task.setWorkers(List.of(foreman));
         task.setHead(foreman);
 
@@ -80,19 +77,18 @@ public class ConnectionTest {
 
         final Stage stage = new Stage();
         stage.setName("stage");
-        stage.setStart(Instant.now());
-        stage.setEnd(Instant.parse("2024-06-01T00:00:01Z"));
-        stage.setExpectedDuration(1000);
+        stage.setStartDate(Instant.now());
+        stage.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
+        stage.setExpectedEndDate(Instant.parse("2026-06-01T00:00:01Z"));
         stage.setTasks(List.of(task));
         stage.setHead(stageHead);
         stageRepository.save(stage);
 
-
         final Project project = new Project();
         project.setName("project");
-        project.setEnd(Instant.now());
-        project.setEnd(Instant.parse("2024-06-01T00:00:01Z"));
-        project.setExpectedDuration(100000);
+        project.setStartDate(Instant.now());
+        project.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
+        project.setExpectedEndDate(Instant.parse("2027-06-01T00:00:01Z"));
         project.setStages(List.of(stage));
         projectRepository.save(project);
     }

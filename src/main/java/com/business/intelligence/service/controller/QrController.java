@@ -21,7 +21,7 @@ import static org.springframework.util.MimeTypeUtils.IMAGE_PNG_VALUE;
 public class QrController {
 
     @RequestMapping(value = "/current", method = RequestMethod.GET, produces = IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> getById(@RequestHeader final HttpHeaders headers) throws Exception {
+    public ResponseEntity<byte[]> getCurrent(@RequestHeader final HttpHeaders headers) throws Exception {
 
         final QrEntity qr = new QrEntity();
         qr.setBuildingId(100500);

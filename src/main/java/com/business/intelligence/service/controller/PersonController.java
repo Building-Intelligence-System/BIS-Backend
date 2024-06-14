@@ -3,8 +3,8 @@ package com.business.intelligence.service.controller;
 import com.business.intelligence.service.exception.LoginAndPasswordRequired;
 import com.business.intelligence.service.exception.UserAlreadyExist;
 import com.business.intelligence.service.exception.WrongPassword;
-import com.business.intelligence.service.model.people.Person;
-import com.business.intelligence.service.model.people.Role;
+import com.business.intelligence.service.model.person.Person;
+import com.business.intelligence.service.model.person.Role;
 import com.business.intelligence.service.repository.PersonRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -59,9 +59,7 @@ public class PersonController {
                 .setIssuer("BIS")
                 .setSubject(person.getLogin())
                 .claim("scope", person.getRole())
-                // Fri Jun 24 2016 15:33:42 GMT-0400 (EDT)
                 .setIssuedAt(Date.from(Instant.now()))
-                // Sat Jun 24 2116 15:33:42 GMT-0400 (EDT)
                 .setExpiration(Date.from(Instant.now().plus(10800, ChronoUnit.SECONDS)))
                 .signWith(
                         SignatureAlgorithm.HS256,

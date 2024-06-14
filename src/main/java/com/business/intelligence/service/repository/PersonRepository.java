@@ -1,6 +1,6 @@
 package com.business.intelligence.service.repository;
 
-import com.business.intelligence.service.model.people.Person;
+import com.business.intelligence.service.model.person.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
