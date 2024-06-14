@@ -32,6 +32,6 @@ public class Project {
     private Double latitude;
     private Double longitude;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Stage> stages = new ArrayList<>();
 }

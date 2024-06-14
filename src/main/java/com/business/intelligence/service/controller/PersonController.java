@@ -90,5 +90,4 @@ public class PersonController {
 
         return auth(headers, person);
     }
-
 }

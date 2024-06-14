@@ -1,6 +1,7 @@
 package com.business.intelligence.service;
 
 import com.business.intelligence.service.controller.PersonController;
+import com.business.intelligence.service.controller.StageController;
 import com.business.intelligence.service.model.building.Project;
 import com.business.intelligence.service.model.building.Stage;
 import com.business.intelligence.service.model.building.Task;
@@ -13,6 +14,8 @@ import com.business.intelligence.service.repository.TaskRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
@@ -33,8 +36,10 @@ public class ConnectionTest {
     ProjectRepository projectRepository;
 
     @Autowired
-    PersonController controller;
+    PersonController personController;
 
+    @Autowired
+    StageController stageController;
     RestTemplate restTemplate = new RestTemplate();
 
     @Test
@@ -91,5 +96,56 @@ public class ConnectionTest {
         project.setExpectedEndDate(Instant.parse("2027-06-01T00:00:01Z"));
         project.setStages(List.of(stage));
         projectRepository.save(project);
+    }
+
+    @Test
+    public void testControllers() throws Exception {
+        final Person foreman = new Person();
+        foreman.setFirstName("maksim");
+        foreman.setSurname("kerunov");
+        foreman.setFatherName("evgenievich");
+        foreman.setRole(Role.FOREMAN);
+        foreman.setLogin("login");
+        foreman.setPassword("password");
+        personRepository.save(foreman);
+
+        final Task task = new Task();
+        task.setName("Бетонирование");
+        task.setStartDate(Instant.now());
+        task.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
+        task.setExpectedEndDate(Instant.parse("2025-06-01T00:00:01Z"));
+        task.setWorkers(List.of(foreman));
+        taskRepository.save(task);
+
+
+        final Stage stage = new Stage();
+        stage.setName("stage");
+        stage.setStartDate(Instant.now());
+        stage.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
+        stage.setExpectedEndDate(Instant.parse("2026-06-01T00:00:01Z"));
+        stage.setTasks(List.of(task));
+
+
+        final Stage updatedStage = new Stage();
+        updatedStage.setId(1);
+        updatedStage.setName("updated");
+        updatedStage.setStartDate(Instant.now());
+        updatedStage.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
+        updatedStage.setExpectedEndDate(Instant.parse("2026-06-01T00:00:01Z"));
+        updatedStage.setTasks(null);
+
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", "OK");
+        stageController.create(httpHeaders, stage);
+
+        final Task newTask = new Task();
+        newTask.setName("Бетонирование");
+        newTask.setStartDate(Instant.now());
+        newTask.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
+        newTask.setExpectedEndDate(Instant.parse("2025-06-01T00:00:01Z"));
+
+        taskRepository.save(newTask);
+        ResponseEntity<Stage> entityFind = stageController.addTask(httpHeaders, stage.getId(), newTask);
     }
 }

@@ -46,16 +46,16 @@ public class StageController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stage> update(@PathVariable("id") final int id,
-                                        @RequestBody final Stage entity) {
+    public ResponseEntity<Stage> update(@RequestHeader final HttpHeaders headers,
+                                        @PathVariable("id") final int id, @RequestBody final Stage entity) {
 
         if (id != entity.getId()) {
-            throw new WrongRequestException("id and body id mismatch");
+            throw new WrongRequestException("Id and body id mismatch");
         }
 
 
-        final Optional<Stage> project = stageRepository.findById(id);
-        if (project.isEmpty()) {
+        final Optional<Stage> stage = stageRepository.findById(id);
+        if (stage.isEmpty()) {
             throw new NotFoundException("Stage not found with id =" + id);
         }
 
@@ -63,14 +63,14 @@ public class StageController {
     }
 
     @RequestMapping(value = "/{id}/add-task", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stage> addTask(@PathVariable("id") final int id,
-                                         @RequestBody final Task task) {
-        final Optional<Stage> project = stageRepository.findById(id);
-        if (project.isEmpty()) {
-            throw new NotFoundException("Project not found with id =" + id);
+    public ResponseEntity<Stage> addTask(@RequestHeader final HttpHeaders headers,
+                                         @PathVariable("id") final int id, @RequestBody final Task task) {
+        final Optional<Stage> stage = stageRepository.findById(id);
+        if (stage.isEmpty()) {
+            throw new NotFoundException("Stage not found with id =" + id);
         }
-        project.get().getTasks().add(task);
-        Stage result = stageRepository.save(project.get());
+        stage.get().getTasks().add(task);
+        Stage result = stageRepository.save(stage.get());
 
         return ResponseEntity.ok(result);
     }

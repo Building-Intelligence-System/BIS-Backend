@@ -4,7 +4,6 @@ package com.business.intelligence.service.controller;
 import com.business.intelligence.service.exception.NotFoundException;
 import com.business.intelligence.service.exception.WrongRequestException;
 import com.business.intelligence.service.model.building.Comment;
-import com.business.intelligence.service.model.building.Stage;
 import com.business.intelligence.service.model.building.Task;
 import com.business.intelligence.service.model.person.Person;
 import com.business.intelligence.service.repository.TaskRepository;
@@ -36,7 +35,7 @@ public class TaskController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = IMAGE_PNG_VALUE)
     public ResponseEntity<Task> getById(@RequestHeader final HttpHeaders headers,
-                                         @PathVariable("id") final int id) throws Exception {
+                                        @PathVariable("id") final int id) throws Exception {
         Optional<Task> result = taskRepository.findById(id);
         return result.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -47,43 +46,43 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Task> update(
-            @PathVariable("id") final int id,
-            @RequestBody final Task entity) {
+    public ResponseEntity<Task> update(@RequestHeader HttpHeaders headers,
+                                       @PathVariable("id") final int id,
+                                       @RequestBody final Task entity) {
         if (id != entity.getId()) {
-            throw new WrongRequestException("id and body id mismatch");
+            throw new WrongRequestException("Id and body id mismatch");
         }
 
         final Optional<Task> project = taskRepository.findById(id);
         if (project.isEmpty()) {
-            throw new NotFoundException("Stage not found with id =" + id);
+            throw new NotFoundException("Task not found with id =" + id);
         }
 
         return ResponseEntity.ok(taskRepository.save(entity));
     }
 
     @RequestMapping(value = "/{id}/add-worker", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Task> addWorker(@PathVariable("id") final int id,
-                                           @RequestBody final Person worker) {
-        final Optional<Task> project = taskRepository.findById(id);
-        if (project.isEmpty()) {
-            throw new NotFoundException("Project not found with id =" + id);
+    public ResponseEntity<Task> addWorker(@RequestHeader HttpHeaders headers, @PathVariable("id") final int id,
+                                          @RequestBody final Person worker) {
+        final Optional<Task> task = taskRepository.findById(id);
+        if (task.isEmpty()) {
+            throw new NotFoundException("Task not found with id =" + id);
         }
-        project.get().getWorkers().add(worker);
-        final Task result = taskRepository.save(project.get());
+        task.get().getWorkers().add(worker);
+        final Task result = taskRepository.save(task.get());
 
         return ResponseEntity.ok(result);
     }
 
     @RequestMapping(value = "/{id}/add-comment", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Task> addComment(@PathVariable("id") final int id,
+    public ResponseEntity<Task> addComment(@RequestHeader HttpHeaders headers, @PathVariable("id") final int id,
                                            @RequestBody final Comment comment) {
-        final Optional<Task> project = taskRepository.findById(id);
-        if (project.isEmpty()) {
-            throw new NotFoundException("Project not found with id =" + id);
+        final Optional<Task> task = taskRepository.findById(id);
+        if (task.isEmpty()) {
+            throw new NotFoundException("Task not found with id =" + id);
         }
-        project.get().getComments().add(comment);
-        final Task result = taskRepository.save(project.get());
+        task.get().getComments().add(comment);
+        final Task result = taskRepository.save(task.get());
 
         return ResponseEntity.ok(result);
     }
