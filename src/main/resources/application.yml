@@ -1,21 +1,3 @@
-#spring:
-#  application:
-#    name: business-intelligence-service
-#    datasource:
-#      type: com.zaxxer.hikari.HikariDataSource
-#      url: jdbc:postgresql://localhost:5432/bis
-#      username: postgres
-#      password: postgres
-#      driver-class-name: com.mysql.jdbc.Driver
-#      hikari:
-#        maximumPoolSize: 30
-#
-#  jpa:
-#    generate-ddl: true
-#    hibernate:
-#      ddl-auto: update
-#    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
-
 spring:
   application:
     name: urganlabs-backend
@@ -49,3 +31,7 @@ server:
 logging:
   level:
     root: INFO
+
+token:
+  signed:
+    key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855

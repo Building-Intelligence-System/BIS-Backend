@@ -1,4 +1,4 @@
-package com.business.intelligence.service.qr;
+package com.business.intelligence.service.model;
 
 import lombok.Data;
 import lombok.Getter;

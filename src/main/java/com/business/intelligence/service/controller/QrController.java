@@ -1,5 +1,6 @@
-package com.business.intelligence.service.qr;
+package com.business.intelligence.service.controller;
 
+import com.business.intelligence.service.model.QrEntity;
 import com.business.intelligence.service.utils.JsonUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
@@ -52,7 +53,6 @@ public class QrController {
         MatrixToImageConfig con = new MatrixToImageConfig(0xFF000002, 0x00000000);
 
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream, con);
-        byte[] pngData = pngOutputStream.toByteArray();
-        return pngData;
+        return pngOutputStream.toByteArray();
     }
 }

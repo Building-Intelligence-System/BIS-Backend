@@ -1,11 +1,12 @@
 package com.business.intelligence.service;
 
-import com.business.intelligence.service.dao.PersonRepository;
-import com.business.intelligence.service.dao.ProjectRepository;
-import com.business.intelligence.service.dao.StageRepository;
-import com.business.intelligence.service.dao.TaskRepository;
+import com.business.intelligence.service.repository.PersonRepository;
+import com.business.intelligence.service.repository.ProjectRepository;
+import com.business.intelligence.service.repository.StageRepository;
+import com.business.intelligence.service.repository.TaskRepository;
 import com.business.intelligence.service.model.constructionregion.Project;
 import com.business.intelligence.service.model.constructionregion.Stage;
+import com.business.intelligence.service.repository.PersonRepository;
 import com.business.intelligence.service.model.constructionregion.Task;
 import com.business.intelligence.service.model.people.Person;
 import com.business.intelligence.service.model.people.Role;
