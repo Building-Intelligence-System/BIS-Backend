@@ -1,5 +1,6 @@
 package com.business.intelligence.service.controller;
 
+import com.business.intelligence.service.exception.LoginAndPasswordRequired;
 import com.business.intelligence.service.exception.UserAlreadyExist;
 import com.business.intelligence.service.exception.WrongPassword;
 import com.business.intelligence.service.model.people.Person;
@@ -36,13 +37,16 @@ public class PersonController {
     public ResponseEntity<Person> create(@RequestHeader final HttpHeaders headers, final Person person) throws Exception {
         final Optional<Person> existedPerson = personRepository.findByLogin(person.getLogin());
         if (existedPerson.isPresent()) {
-            throw new UserAlreadyExist("User already exist" + person.getLogin());
+            throw new UserAlreadyExist("User already exist " + person.getLogin());
         }
         return ResponseEntity.ok(personRepository.save(person));
     }
 
     @RequestMapping(value = "/auth", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<String> auth(@RequestHeader final HttpHeaders headers, final Person person) throws Exception {
+        if (person.getLogin() == null || person.getPassword() == null) {
+            throw new LoginAndPasswordRequired("Login and password required");
+        }
         final Optional<Person> existedPerson = personRepository.findByLogin(person.getLogin());
         if (existedPerson.isEmpty()) {
             throw new UserAlreadyExist("User not exist " + person.getLogin());

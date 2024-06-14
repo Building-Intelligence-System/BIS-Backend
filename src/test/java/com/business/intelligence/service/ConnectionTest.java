@@ -1,5 +1,6 @@
 package com.business.intelligence.service;
 
+import com.business.intelligence.service.controller.PersonController;
 import com.business.intelligence.service.model.constructionregion.Project;
 import com.business.intelligence.service.model.constructionregion.Stage;
 import com.business.intelligence.service.model.constructionregion.Task;
@@ -12,6 +13,7 @@ import com.business.intelligence.service.repository.TaskRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.util.List;
@@ -30,10 +32,14 @@ public class ConnectionTest {
     @Autowired
     ProjectRepository projectRepository;
 
+    @Autowired
+    PersonController controller;
+
+    RestTemplate restTemplate = new RestTemplate();
+
     @Test
     public void connectionTest() {
         final Person worker = new Person();
-
         worker.setFirstName("alex");
         worker.setSurname("morozov");
         worker.setFatherName("evgenievich");
@@ -89,7 +95,5 @@ public class ConnectionTest {
         project.setExpectedDuration(100000);
         project.setStages(List.of(stage));
         projectRepository.save(project);
-
-
     }
 }

@@ -29,41 +29,6 @@ public class Stage {
     @ManyToOne
     private Project project;
 
-//    @Override
-//    public String toString() {
-//        return new ToStringBuilder(this)
-//                .append("id", id)
-//                .append("name", name)
-//                .append("start", start)
-//                .append("end", end)
-//                .append("expectedDuration", expectedDuration)
-//                .toString();
-//    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final Stage stage = (Stage) o;
-        return Objects.equals(id, stage.id) &&
-                Objects.equals(name, stage.name)
-                && Objects.equals(start, stage.start)
-                && Objects.equals(end, stage.end)
-                && Objects.equals(expectedDuration, stage.expectedDuration)
-                && Objects.equals(head, stage.head)
-                && Objects.equals(tasks, stage.tasks)
-                && Objects.equals(project, stage.project);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, start, end, expectedDuration, head, tasks, project);
-    }
-
     @Override
     public String toString() {
         return "Stage{" +
