@@ -25,7 +25,7 @@ public class Task {
     private Instant expectedEndDate;
     private Instant actualEndDate;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Person head;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Person> workers = new ArrayList<>();
