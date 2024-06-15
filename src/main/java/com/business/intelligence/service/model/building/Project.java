@@ -23,6 +23,7 @@ public class Project {
 
     private String name;
     private Instant startDate;
+    private Instant expectedEndDate;
     private Instant actualEndDate;
     private ConstructionType constructionType;
     private String imageReference;

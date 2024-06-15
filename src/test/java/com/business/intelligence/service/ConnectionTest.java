@@ -1,22 +1,19 @@
 package com.business.intelligence.service;
 
 import com.business.intelligence.service.controller.PersonController;
+import com.business.intelligence.service.controller.PersonShiftsController;
 import com.business.intelligence.service.controller.StageController;
 import com.business.intelligence.service.model.building.Project;
 import com.business.intelligence.service.model.building.Stage;
 import com.business.intelligence.service.model.building.Task;
 import com.business.intelligence.service.model.person.Person;
 import com.business.intelligence.service.model.person.Role;
-import com.business.intelligence.service.repository.PersonRepository;
-import com.business.intelligence.service.repository.ProjectRepository;
-import com.business.intelligence.service.repository.StageRepository;
-import com.business.intelligence.service.repository.TaskRepository;
+import com.business.intelligence.service.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.util.List;
@@ -39,8 +36,12 @@ public class ConnectionTest {
     PersonController personController;
 
     @Autowired
+    PersonShiftsRepository shiftsRepository;
+    @Autowired
     StageController stageController;
-    RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    PersonShiftsController personShiftsController;
 
     @Test
     public void connectionTest() {

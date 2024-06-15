@@ -1,4 +1,4 @@
-package com.business.intelligence.service.model;
+package com.business.intelligence.service.model.shifts;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,6 +19,8 @@ public class PersonShifts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    private boolean isEnding;
 
     private Integer personId;
     private Instant scanTime;
