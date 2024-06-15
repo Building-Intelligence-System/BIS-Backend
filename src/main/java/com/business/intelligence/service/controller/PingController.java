@@ -45,24 +45,24 @@ public class PingController {
     public ResponseEntity<Void> init(@RequestHeader final HttpHeaders headers) throws Exception {
 
         final Person worker = new Person();
-        worker.setFirstName("alex");
-        worker.setSurname("morozov");
-        worker.setFatherName("evgenievich");
+        worker.setFirstName("Алексей");
+        worker.setSurname("Морозов");
+        worker.setFatherName("Евгеньевич");
         worker.setRole(Role.WORKER);
         personRepository.save(worker);
 
         final Person foreman = new Person();
-        foreman.setFirstName("maksim");
-        foreman.setSurname("kerunov");
-        foreman.setFatherName("evgenievich");
+        foreman.setFirstName("Максим");
+        foreman.setSurname("Керунов");
+        foreman.setFatherName("Евгеньевич");
         foreman.setRole(Role.FOREMAN);
         personRepository.save(foreman);
 
         final Task task = new Task();
-        task.setName("Бетонирование");
-        task.setStartDate(Instant.now());
-        task.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
-        task.setExpectedEndDate(Instant.parse("2025-06-01T00:00:01Z"));
+        task.setName("Изучение грунта");
+        task.setStartDate(Instant.parse("2020-05-01T00:00:01Z"));
+        task.setActualEndDate(Instant.parse("2024-05-27T00:00:01Z"));
+        task.setExpectedEndDate(Instant.parse("2024-05-30T00:00:01Z"));
         task.setWorkers(List.of(foreman));
         taskRepository.save(task);
 
@@ -73,28 +73,28 @@ public class PingController {
         personRepository.save(worker);
 
         final Person stageHead = new Person();
-        stageHead.setFirstName("artur");
-        stageHead.setSurname("hehe");
-        stageHead.setFatherName("evgenievich");
+        stageHead.setFirstName("Артур");
+        stageHead.setSurname("Мушулов");
+        stageHead.setFatherName("Викторович");
         stageHead.setRole(Role.FOREMAN);
         personRepository.save(stageHead);
 
         final Stage stage = new Stage();
-        stage.setName("stage");
-        stage.setStartDate(Instant.now());
-        stage.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
-        stage.setExpectedEndDate(Instant.parse("2026-06-01T00:00:01Z"));
+        stage.setName("Подготовительный этап");
+        stage.setStartDate(Instant.parse("2019-05-01T00:00:01Z"));
+        stage.setActualEndDate(Instant.parse("2020-02-01T00:00:01Z"));
+        stage.setExpectedEndDate(Instant.parse("2019-12-24T00:00:01Z"));
         stage.setTasks(List.of(task));
         stage.setHead(stageHead);
         stageRepository.save(stage);
 
         final Project project = new Project();
-        project.setName("project");
-        project.setStartDate(Instant.now());
-        project.setActualEndDate(Instant.parse("2024-06-01T00:00:01Z"));
+        project.setName("Строительство многоквартирного дома в г.Краснодаре, ул. Северной, д.15");
+        project.setStartDate(Instant.parse("2019-05-01T00:00:01Z"));
+        project.setExpectedEndDate(Instant.parse("2024-05-01T00:00:01Z"));
+        project.setActualEndDate(Instant.parse("2024-02-01T00:00:01Z"));
         project.setStages(List.of(stage));
         projectRepository.save(project);
-
 
         return ResponseEntity.ok().build();
     }

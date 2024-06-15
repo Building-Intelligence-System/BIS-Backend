@@ -23,6 +23,7 @@ public class Project {
 
     private String name;
     private Instant startDate;
+    private Instant expectedEndDate;
     private Instant actualEndDate;
     private ConstructionType constructionType;
     private String imageReference;
@@ -31,6 +32,6 @@ public class Project {
     private Double latitude;
     private Double longitude;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Stage> stages = new ArrayList<>();
 }

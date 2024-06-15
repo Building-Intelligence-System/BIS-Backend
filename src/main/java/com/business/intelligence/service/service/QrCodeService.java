@@ -1,10 +1,9 @@
 package com.business.intelligence.service.service;
 
-import com.business.intelligence.service.model.QrEntity;
+import com.business.intelligence.service.model.shifts.QrEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Random;

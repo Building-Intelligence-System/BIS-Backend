@@ -9,7 +9,6 @@ import lombok.ToString;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Data
@@ -27,14 +26,14 @@ public class Task {
     private Instant actualEndDate;
     private TaskState taskState;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Person head;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Person> workers = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Stage stage;
 }

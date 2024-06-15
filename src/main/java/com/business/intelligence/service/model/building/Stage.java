@@ -26,10 +26,10 @@ public class Stage {
     private Instant expectedEndDate;
     private Instant actualEndDate;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Person head;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Project project;
-    @OneToMany(mappedBy = "stage", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Task> tasks = new ArrayList<>();
 }

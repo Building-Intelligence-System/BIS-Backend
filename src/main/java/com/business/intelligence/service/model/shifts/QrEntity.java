@@ -1,4 +1,4 @@
-package com.business.intelligence.service.model;
+package com.business.intelligence.service.model.shifts;
 
 import lombok.*;
 

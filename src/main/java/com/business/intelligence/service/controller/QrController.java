@@ -1,8 +1,8 @@
 package com.business.intelligence.service.controller;
 
-import com.business.intelligence.service.model.PersonShifts;
-import com.business.intelligence.service.model.QrEntity;
-import com.business.intelligence.service.repository.PersonDayShiftRepository;
+import com.business.intelligence.service.model.shifts.PersonShifts;
+import com.business.intelligence.service.model.shifts.QrEntity;
+import com.business.intelligence.service.repository.PersonShiftsRepository;
 import com.business.intelligence.service.service.QrCodeService;
 import com.business.intelligence.service.utils.JsonUtils;
 import com.google.zxing.BarcodeFormat;
@@ -23,23 +23,25 @@ import static org.springframework.util.MimeTypeUtils.IMAGE_PNG_VALUE;
 @RequestMapping("/qr")
 public class QrController {
 
-    final PersonDayShiftRepository personDayShiftRepository;
+    final PersonShiftsRepository personDayShiftRepository;
     final QrCodeService qrCodeService;
 
-    public QrController(final PersonDayShiftRepository personDayShiftRepository,
+    public QrController(final PersonShiftsRepository personDayShiftRepository,
                         final QrCodeService qrCodeService) {
         this.personDayShiftRepository = personDayShiftRepository;
         this.qrCodeService = qrCodeService;
     }
 
-    @RequestMapping(value = "/current", method = RequestMethod.GET, produces = IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> getCurrent(@RequestHeader final HttpHeaders headers) throws Exception {
+    @RequestMapping(value = "/current/{projectId}", method = RequestMethod.GET, produces = IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> getCurrent(@RequestHeader final HttpHeaders headers, @PathVariable("projectId") final int projectId) throws Exception {
 
         final QrEntity qr = new QrEntity();
-        qr.setProjectId(100500);
-        qr.setPassword("password");
+        qr.setProjectId(projectId);
+        qr.setPassword(qrCodeService.getPassword());
         qr.setTime(Instant.now());
 
+        final Integer userID = Integer.valueOf(headers.get("USER_ID").get(0));
+        personDayShiftRepository.save(new PersonShifts(-1, false, userID, qr.getTime()));
         String medium = JsonUtils.getJsonMapper().writeValueAsString(qr);
 
         byte[] image = getQRCodeImage(medium, 250, 250);
@@ -54,7 +56,7 @@ public class QrController {
         if (!qrCodeService.getPassword().equals(qrEntity.getPassword())) {
             return ResponseEntity.badRequest().body("Old qr code");
         }
-        personDayShiftRepository.save(new PersonShifts(-1, userID, Instant.now()));
+        personDayShiftRepository.save(new PersonShifts(-1, true, userID, qrEntity.getTime()));
 
         return ResponseEntity.ok().build();
     }
