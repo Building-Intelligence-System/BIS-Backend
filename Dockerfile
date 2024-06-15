@@ -8,5 +8,5 @@ ADD build/libs/service.jar /
 CMD echo "Service is starting..." && \
     \
     java -XX:+ExitOnOutOfMemoryError \
-    -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=docker -Djavax.xml.accessExternalDTD=all $JAVA_OPTIONS \
+    -Djava.security.egd=file:/dev/./urandom -Djavax.xml.accessExternalDTD=all $JAVA_OPTIONS \
     -jar /service.jar
