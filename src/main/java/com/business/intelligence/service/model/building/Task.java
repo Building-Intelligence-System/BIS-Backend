@@ -25,6 +25,7 @@ public class Task {
     private Instant startDate;
     private Instant expectedEndDate;
     private Instant actualEndDate;
+    private TaskState taskState;
 
     @OneToOne
     private Person head;
