@@ -53,7 +53,6 @@ public class StageController {
             throw new WrongRequestException("Id and body id mismatch");
         }
 
-
         final Optional<Stage> stage = stageRepository.findById(id);
         if (stage.isEmpty()) {
             throw new NotFoundException("Stage not found with id =" + id);

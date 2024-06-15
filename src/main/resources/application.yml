@@ -1,6 +1,6 @@
 spring:
   application:
-    name: urganlabs-backend
+    name: bis-backend
   main:
     banner-mode: off
   datasource:

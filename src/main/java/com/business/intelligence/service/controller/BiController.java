@@ -29,7 +29,7 @@ public class BiController {
     }
 
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProjectBiInfoDto> addStage(@PathVariable("id") final int id) {
+    public ResponseEntity<ProjectBiInfoDto> projectBI(@PathVariable("id") final int id) {
         final Optional<Project> project = projectRepository.findById(id);
         if (project.isEmpty()) {
             throw new NotFoundException("Project not found with id =" + id);

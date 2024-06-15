@@ -24,6 +24,7 @@ public class Task {
     private Instant startDate;
     private Instant expectedEndDate;
     private Instant actualEndDate;
+    private TaskState taskState;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Person head;
