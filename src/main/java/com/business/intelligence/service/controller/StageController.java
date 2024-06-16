@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.util.MimeTypeUtils.IMAGE_PNG_VALUE;
 
 @RestController
 @RequestMapping("/stage")
@@ -25,7 +24,7 @@ public class StageController {
         this.stageRepository = stageRepository;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = IMAGE_PNG_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Stage> create(@RequestHeader final HttpHeaders headers,
                                         @RequestBody final Stage stage) throws Exception {
         stageRepository.save(stage);
@@ -33,14 +32,14 @@ public class StageController {
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = IMAGE_PNG_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Stage> getById(@RequestHeader final HttpHeaders headers,
                                          @PathVariable("id") final int id) throws Exception {
         Optional<Stage> result = stageRepository.findById(id);
         return result.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = IMAGE_PNG_VALUE)
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Stage>> getAll(@RequestHeader final HttpHeaders headers) throws Exception {
         return ResponseEntity.ok(stageRepository.findAll());
     }

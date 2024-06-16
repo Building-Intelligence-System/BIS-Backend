@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.util.MimeTypeUtils.IMAGE_PNG_VALUE;
 
 @RestController
 @RequestMapping("/task")
@@ -27,20 +26,20 @@ public class TaskController {
         this.taskRepository = taskRepository;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = IMAGE_PNG_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Task> create(@RequestHeader final HttpHeaders headers,
                                        @RequestBody final Task stage) throws Exception {
         return ResponseEntity.ok(taskRepository.save(stage));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = IMAGE_PNG_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Task> getById(@RequestHeader final HttpHeaders headers,
                                         @PathVariable("id") final int id) throws Exception {
         Optional<Task> result = taskRepository.findById(id);
         return result.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = IMAGE_PNG_VALUE)
+    @RequestMapping(value = "/all", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Task>> getAll(@RequestHeader final HttpHeaders headers) throws Exception {
         return ResponseEntity.ok(taskRepository.findAll());
     }
