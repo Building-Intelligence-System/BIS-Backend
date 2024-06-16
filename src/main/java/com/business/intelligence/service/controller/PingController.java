@@ -98,8 +98,8 @@ public class PingController {
     }
 
 
-    @RequestMapping(value = "/get-test-data", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Project>> getTestData() {
+    @RequestMapping(value = "/get-test-projects", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Project>> getTestProjects() {
 
         // region PROJECT 1
 
