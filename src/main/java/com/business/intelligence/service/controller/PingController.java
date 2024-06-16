@@ -99,7 +99,7 @@ public class PingController {
 
 
     @RequestMapping(value = "/get-test-projects", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Project>> getTestProjects() {
+    public ResponseEntity<List<Project>> getTestProjects(final HttpHeaders headers) {
 
         // region PROJECT 1
 
